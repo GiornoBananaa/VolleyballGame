@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/OnlineMatch.unity
+    guid: ab21387d571275d43b3fcadfc17383a0
   m_configObjects: {}

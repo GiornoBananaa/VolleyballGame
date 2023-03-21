@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MatchManager : MonoBehaviour
+public class NetMatchManager : MonoBehaviour
 {
     private static float _startFreezeTime = 1.2f;
     private static GameObject _player0;
@@ -15,18 +15,19 @@ public class MatchManager : MonoBehaviour
 
     private void Start()
     {
-        _player0 = GameObject.Find("Player0");
-        _player1 = GameObject.Find("Player1");
         _ball = GameObject.Find("Ball");
         _player0Spawn = GameObject.Find("Player0Spawn").GetComponent<Transform>();
         _player1Spawn = GameObject.Find("Player1Spawn").GetComponent<Transform>();
         _ballPlayer0Spawn = GameObject.Find("BallPlayer0Spawn").GetComponent<Transform>();
         _ballPlayer1Spawn = GameObject.Find("BallPlayer1Spawn").GetComponent<Transform>();
+
+        
+
         ReloadMatch(3);
     }
 
     protected void ReloadMatch(int player)
-    {
+    {/*
         _player0.transform.position = _player0Spawn.position;
         _player0.transform.rotation = _player0Spawn.rotation;
 
@@ -35,11 +36,11 @@ public class MatchManager : MonoBehaviour
 
         if (player == 0)
             _ball.transform.position = _ballPlayer1Spawn.position;
-        else if(player == 1)
+        else if (player == 1)
             _ball.transform.position = _ballPlayer0Spawn.position;
 
 
-        StartCoroutine(FreezeEverything());
+        StartCoroutine(FreezeEverything());*/
     }
 
     private IEnumerator FreezeEverything()
