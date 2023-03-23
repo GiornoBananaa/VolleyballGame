@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7581825657048974419}
   - component: {fileID: -308408071071290073}
-  - component: {fileID: 7581825657048974429}
   - component: {fileID: 7581825657048974416}
   - component: {fileID: 7581825657048974418}
   - component: {fileID: 7581825657048974417}
-  - component: {fileID: -3147977692404355604}
-  - component: {fileID: 1033398523450486493}
+  - component: {fileID: -8707055356774827715}
+  - component: {fileID: -3860632154087730093}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -58,22 +57,6 @@ MonoBehaviour:
   _boostTime: 0.3
   _boostSpeed: 15
   _boostButtonPressingSpeed: 0.19
---- !u!114 &7581825657048974429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7581825657048974423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!50 &7581825657048974416
 Rigidbody2D:
   serializedVersion: 4
@@ -163,7 +146,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-3147977692404355604
+--- !u!114 &-8707055356774827715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,24 +155,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7581825657048974423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 250df26a51297684ea7d63cac17d3729, type: 3}
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  InLocalSpace: 0
-  Interpolate: 1
---- !u!114 &1033398523450486493
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &-3860632154087730093
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,6 +171,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7581825657048974423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Script: {fileID: 11500000, guid: 09b54e204d2125e44a0bfaa1e0aa89ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cheapInterpolationTime: 0.1

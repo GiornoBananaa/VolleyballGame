@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 using TMPro;
 
-public class NetScoreManager : NetMatchManager
+public class NetScoreManager : NetworkBehaviour
 {
     [SerializeField] private int _winScore;
     [SerializeField] private TMP_Text _player0ScoreText;
     [SerializeField] private TMP_Text _player1ScoreText;
+    [SerializeField] private NetMatchManager _matchManager;
 
 
     private int _scorePlaye0;
@@ -34,7 +36,7 @@ public class NetScoreManager : NetMatchManager
         else if (_scorePlaye1 >= _winScore)
             PlayerWin(1);
 
-        ReloadMatch(player);
+        _matchManager.ReloadMatch(player);
     }
 
     private void PlayerWin(int player)

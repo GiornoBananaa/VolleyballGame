@@ -11,7 +11,6 @@ public class NetGroundBallHit : MonoBehaviour
     {
         if (collision.collider.GetComponent<BallScript>())
         {
-            Debug.Log(1);
             _scoreManager.Score(_player);
         }
     }

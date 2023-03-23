@@ -30,7 +30,7 @@ public class NetCharacterMovementController : NetworkBehaviour
     private float _leftPressedTime;
 
 
-    void Start()
+    public override void OnNetworkSpawn()
     {
         _upKey = KeyCode.W;
         _downKey = KeyCode.S;
@@ -46,6 +46,11 @@ public class NetCharacterMovementController : NetworkBehaviour
 
     void Update()
     {
+        if(IsOwner) MoveHandler();
+    }
+
+    private void MoveHandler()
+    {
         bool _jumping = false;
         bool _movingDown = false;
         float up = 0;
@@ -53,8 +58,7 @@ public class NetCharacterMovementController : NetworkBehaviour
 
         _rightPressedTime += Time.deltaTime;
         _leftPressedTime += Time.deltaTime;
-
-        if (!_isBoost && IsOwner)
+        if (!_isBoost)
         {
             if (Input.GetKeyDown(_upKey))
             {
@@ -104,7 +108,6 @@ public class NetCharacterMovementController : NetworkBehaviour
                 _leftPressedTime = 0;
             }
         }
-
 
         if (_jumping)
             _rigidbody.velocity = new Vector2(right, up);
