@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundBallHit : MonoBehaviour
+public class AIGroundBallHit : MonoBehaviour
 {
     [SerializeField] private int _player;
-    [SerializeField] private ScoreManager _scoreManager;
+    [SerializeField] private AIScoreManager _scoreManager;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
