@@ -33,5 +33,9 @@ public class BallScript : MonoBehaviour
             _rigidbody.bodyType = RigidbodyType2D.Dynamic;
             _rigidbody.velocity = (new Vector2(transform.position.x, transform.position.y) - collision.contacts[0].point) * _firstHitForce;
         }
+        if (collision.collider.gameObject.layer == 9)
+        {
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x*1.2f, _rigidbody.velocity.y);
+        }
     }
 }

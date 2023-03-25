@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using TMPro;
 
-public class ScoreManager : MatchManager
+public class AIScoreManager : MatchAIManager
 {
     [SerializeField] private int _winScore;
     [SerializeField] private TMP_Text _player0ScoreText;
@@ -23,7 +23,7 @@ public class ScoreManager : MatchManager
     {
         if (player == 0)
             _scorePlaye0++;
-        else if(player == 1)
+        else if (player == 1)
             _scorePlaye1++;
 
         _player0ScoreText.text = _scorePlaye0.ToString();
@@ -39,6 +39,6 @@ public class ScoreManager : MatchManager
 
     private void PlayerWin(int player)
     {
-        Debug.Log("Player " + (player+1) + " wins");
+        Debug.Log("Player " + (player + 1) + " wins");
     }
 }

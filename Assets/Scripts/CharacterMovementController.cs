@@ -22,10 +22,12 @@ public class CharacterMovementController : MonoBehaviour
     private KeyCode _rightKey;
     private KeyCode _leftKey;
 
+    private ScoreManager _scoreManager;
     private Rigidbody2D _rigidbody;
     private bool _inAir;
     private bool _doubleJump;
     private bool _isBoost;
+    private float _ballTouchTime;
     private float _rightPressedTime;
     private float _leftPressedTime;
 
@@ -47,11 +49,13 @@ public class CharacterMovementController : MonoBehaviour
             _leftKey = KeyCode.LeftArrow;
         }
 
+        _ballTouchTime = 0;
         _rightPressedTime = 5;
         _leftPressedTime = 5;
         _inAir = false;
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.gravityScale = _gravityScale;
+        _scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
     }
 
     void Update()
@@ -122,6 +126,8 @@ public class CharacterMovementController : MonoBehaviour
                 _rigidbody.velocity = new Vector2(right, _rigidbody.velocity.y + (up * Time.deltaTime));
             else if(!_isBoost)
                 _rigidbody.velocity = new Vector2(right, _rigidbody.velocity.y);
+
+        Debug.Log(_ballTouchTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -130,6 +136,24 @@ public class CharacterMovementController : MonoBehaviour
         {
             _inAir = false;
             _doubleJump = false;
+        }
+        if (collision.collider.gameObject.layer == 7)
+        {
+            _ballTouchTime = 0;
+        }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject.layer == 7)
+        {
+            _ballTouchTime += Time.deltaTime;
+            if (_ballTouchTime > 2)
+            {
+                if(_playerNumber == 0)
+                    _scoreManager.Score(1);
+                else
+                    _scoreManager.Score(0);
+            }
         }
     }
 

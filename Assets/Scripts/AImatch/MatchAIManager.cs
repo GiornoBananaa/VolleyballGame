@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class MatchManager : MonoBehaviour
+public class MatchAIManager : MonoBehaviour
 {
     private static float _startFreezeTime = 1.2f;
     private static GameObject _player0;
@@ -12,10 +13,11 @@ public class MatchManager : MonoBehaviour
     private static Transform _ballPlayer0Spawn;
     private static Transform _ballPlayer1Spawn;
 
+
     private void Start()
     {
-        _player0 = GameObject.Find("Player0");
-        _player1 = GameObject.Find("Player1");
+        _player0 = GameObject.Find("Player");
+        _player1 = GameObject.Find("PlayerAI");
         _ball = GameObject.Find("Ball");
         _player0Spawn = GameObject.Find("Player0Spawn").GetComponent<Transform>();
         _player1Spawn = GameObject.Find("Player1Spawn").GetComponent<Transform>();
@@ -35,7 +37,7 @@ public class MatchManager : MonoBehaviour
 
         if (player == 0)
             _ball.transform.position = _ballPlayer1Spawn.position;
-        else if(player == 1)
+        else if (player == 1)
             _ball.transform.position = _ballPlayer0Spawn.position;
 
 
@@ -47,7 +49,7 @@ public class MatchManager : MonoBehaviour
         _player0.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         _player1.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         _player0.GetComponent<CharacterMovementController>().enabled = false;
-        _player1.GetComponent<CharacterMovementController>().enabled = false;
+        _player1.GetComponent<AIMovementController>().enabled = false;
         _ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
 
         yield return new WaitForSeconds(_startFreezeTime);
@@ -55,6 +57,6 @@ public class MatchManager : MonoBehaviour
         _player0.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         _player1.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         _player0.GetComponent<CharacterMovementController>().enabled = true;
-        _player1.GetComponent<CharacterMovementController>().enabled = true;
+        _player1.GetComponent<AIMovementController>().enabled = true;
     }
 }
