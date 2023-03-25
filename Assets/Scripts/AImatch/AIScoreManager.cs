@@ -22,9 +22,9 @@ public class AIScoreManager : MatchAIManager
     public void Score(int player)
     {
         if (player == 0)
-            _scorePlaye1++;
-        else if (player == 1)
             _scorePlaye0++;
+        else if (player == 1)
+            _scorePlaye1++;
 
         _player0ScoreText.text = _scorePlaye0.ToString();
         _player1ScoreText.text = _scorePlaye1.ToString();

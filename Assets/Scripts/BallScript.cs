@@ -35,7 +35,7 @@ public class BallScript : MonoBehaviour
         }
         if (collision.collider.gameObject.layer == 9)
         {
-            _rigidbody.velocity = new Vector2(-_rigidbody.velocity.x*2f, _rigidbody.velocity.y);
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x*1.2f, _rigidbody.velocity.y);
         }
     }
 }

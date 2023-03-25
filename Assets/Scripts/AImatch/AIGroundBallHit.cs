@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class AIGroundBallHit : MonoBehaviour
 {
-    [SerializeField] private int _player;
+    [SerializeField] private int _scorForPlayer;
     [SerializeField] private AIScoreManager _scoreManager;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.GetComponent<BallScript>())
         {
-            _scoreManager.Score(_player);
+            _scoreManager.Score(_scorForPlayer);
         }
     }
 }

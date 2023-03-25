@@ -614,7 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76abe652232473747af9a21c502da5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: 1
+  _scorForPlayer: 0
   _scoreManager: {fileID: 1776923626}
 --- !u!1 &313175302
 GameObject:
@@ -1777,7 +1777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76abe652232473747af9a21c502da5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: 0
+  _scorForPlayer: 1
   _scoreManager: {fileID: 1776923626}
 --- !u!1 &2058449889
 GameObject:

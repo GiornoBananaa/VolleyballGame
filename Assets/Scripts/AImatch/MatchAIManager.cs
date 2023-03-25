@@ -13,6 +13,7 @@ public class MatchAIManager : MonoBehaviour
     private static Transform _ballPlayer0Spawn;
     private static Transform _ballPlayer1Spawn;
 
+
     private void Start()
     {
         _player0 = GameObject.Find("Player");
