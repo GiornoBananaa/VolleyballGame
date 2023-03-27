@@ -36,9 +36,9 @@ public class MatchAIManager : MonoBehaviour
         _player1.transform.rotation = _player1Spawn.rotation;
 
         if (player == 0)
-            _ball.transform.position = _ballPlayer1Spawn.position;
-        else if (player == 1)
             _ball.transform.position = _ballPlayer0Spawn.position;
+        else if (player == 1)
+            _ball.transform.position = _ballPlayer1Spawn.position;
 
 
         StartCoroutine(FreezeEverything());

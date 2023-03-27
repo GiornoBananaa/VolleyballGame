@@ -13,6 +13,8 @@ public class AIMovementController : MonoBehaviour
     [SerializeField] private float _speed = 7;
     [SerializeField] private float _jumpForce = 20;
     [Range(0, 9.81f)] [SerializeField] private float _gravityScale = 3.5f;
+    [SerializeField] private Sprite[] _sprites;
+    [SerializeField] private SpriteRenderer _spriteRender;
 
     private float _ballTouchTime;
     private float _horizontalMistakeTime;
@@ -36,23 +38,16 @@ public class AIMovementController : MonoBehaviour
     private static AIScoreManager _scoreManager;
 
 
-    public void ChangeDifficulty(int difficulty)
-    {
-        if (difficulty == 0)
-            PlayerPrefs.SetInt("Difficulty", 0);
-        else
-            PlayerPrefs.SetInt("Difficulty", 1);
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-
     void Start()
     {
+        _spriteRender.sprite = _sprites[Random.Range(0, _sprites.Length)];
+        _spriteRender.flipX = true;
+
         if (PlayerPrefs.GetInt("Difficulty", 0) == 0)
             _easyDifficulty = true;
         else
             _easyDifficulty = false;
+
 
         _ballTouchTime = 0;
 
@@ -229,7 +224,6 @@ public class AIMovementController : MonoBehaviour
             _horizontalMistake = false;
         }
 
-        Debug.Log(_verticalMistakeTime);
         if (!_verticalMistake && _verticalMistakeTime >= _verticalMistakeTiming && _ball.transform.position.x > 0.5f)
         {
             _verticalMistakeTiming = Random.Range(2, 3);

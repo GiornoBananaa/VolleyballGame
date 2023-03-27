@@ -18,7 +18,7 @@ public class AIScoreManager : MatchAIManager
         _scorePlaye0 = 0;
         _scorePlaye1 = 0;
     }
-
+    
     public void Score(int player)
     {
         if (player == 0)
