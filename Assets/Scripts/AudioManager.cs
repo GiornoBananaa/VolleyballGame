@@ -76,4 +76,13 @@ public class AudioManager : MonoBehaviour
     {
         return _soundsVolume;
     }
+
+    public void Mute()
+    {
+        _musicSource.volume = 0;
+    }
+    public void UnMute()
+    {
+        _musicSource.volume = _musicVolume;
+    }
 }

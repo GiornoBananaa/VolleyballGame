@@ -52,6 +52,7 @@ public class MatchManager : MonoBehaviour
         _player1.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         _player0.GetComponent<CharacterMovementController>().enabled = false;
         _player1.GetComponent<CharacterMovementController>().enabled = false;
+        yield return new WaitForEndOfFrame();
         _ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
 
         int time = _startFreezeTime;

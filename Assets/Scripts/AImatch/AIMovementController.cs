@@ -101,13 +101,13 @@ public class AIMovementController : MonoBehaviour
             }
             if (_directionChangedTime > _directionChangeInterval)
             {
-                if (_ball.transform.position.x + _xHitCenter - transform.position.x > -_horizontalZone + _xHitCenter/2)
+                if (_ball.transform.position.x + _xHitCenter - transform.position.x > -_horizontalZone + _xHitCenter/2 && transform.position.x < 7.5f)
                 {
                     MoveRight = true;
                     _directionChangedTime = 0;
                     _pastDirection = true;
                 }
-                if (_ball.transform.position.x + _xHitCenter - transform.position.x < _horizontalZone - _xHitCenter / 2 && transform.position.x > 3.25)
+                if ((_ball.transform.position.x + _xHitCenter - transform.position.x < _horizontalZone - _xHitCenter / 2 && transform.position.x > 3.25) || transform.position.x > 8f)
                 {
                     MoveLeft = true;
                     _directionChangedTime = 0;
@@ -198,7 +198,7 @@ public class AIMovementController : MonoBehaviour
         if (right != 0) _animator.SetBool("Move", true);
         else _animator.SetBool("Move", false);
 
-        if (_ball.transform.position.x - transform.position.x < _horizontalZone && _ball.transform.position.x - transform.position.x > -_horizontalZone)
+        if (_ball.transform.position.x - transform.position.x < _horizontalZone && _ball.transform.position.x - transform.position.x > -_horizontalZone && transform.position.x < 7.5f)
         {
             if(_ballRigidbody.velocity.x <= _speed) _rigidbody.velocity = new Vector2(_ballRigidbody.velocity.x, _rigidbody.velocity.y);
            else _rigidbody.velocity = new Vector2(_speed, _rigidbody.velocity.y);

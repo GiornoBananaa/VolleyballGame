@@ -27,7 +27,6 @@ public class SkinSwitcher : MonoBehaviour
         {
             _saveSkinNames[i] = _skins[i].name;
             _skinsAccess[i] = PlayerPrefs.GetInt(_saveSkinNames[i], 0);
-            _skinsAccess[i] = 1;
         }
 
         _choosedSkin = PlayerPrefs.GetInt("Skin", 0);
@@ -70,10 +69,8 @@ public class SkinSwitcher : MonoBehaviour
         else _selectButton.interactable = true;
     }
 
-    public void LaunchAdvertisement()
+    public void AdReward()
     {
-        //Launch Ad for _selectedSkin
-
         _skinsAccess[_selectedSkin]++;
         _advertismentButton.gameObject.SetActive(false);
         _selectButton.gameObject.SetActive(true);
