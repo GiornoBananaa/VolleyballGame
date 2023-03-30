@@ -9,6 +9,7 @@ public class BallScript : MonoBehaviour
     [SerializeField] private float _firstHitForce = 8f;
 
     private Rigidbody2D _rigidbody;
+    private AudioSource _soundSource;
 
     void Start()
     {
@@ -16,6 +17,9 @@ public class BallScript : MonoBehaviour
 
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.gravityScale = _gravityScale;
+
+        _soundSource = GetComponent<AudioSource>();
+        _soundSource.volume = GameObject.Find("Sounds Source(Clone)").GetComponent<AudioSource>().volume;
     }
 
     void Update()
@@ -28,8 +32,9 @@ public class BallScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (_rigidbody.bodyType == RigidbodyType2D.Static && collision.collider.gameObject.layer != 6)
+        if (_rigidbody.bodyType == RigidbodyType2D.Static && collision.collider.gameObject.layer == 10)
         {
+
             _rigidbody.bodyType = RigidbodyType2D.Dynamic;
             _rigidbody.velocity = (new Vector2(transform.position.x, transform.position.y) - collision.contacts[0].point) * _firstHitForce;
         }
@@ -37,5 +42,6 @@ public class BallScript : MonoBehaviour
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x*1.2f, _rigidbody.velocity.y);
         }
+        _soundSource.Play();
     }
 }

@@ -27,6 +27,7 @@ public class SkinSwitcher : MonoBehaviour
         {
             _saveSkinNames[i] = _skins[i].name;
             _skinsAccess[i] = PlayerPrefs.GetInt(_saveSkinNames[i], 0);
+            _skinsAccess[i] = 1;
         }
 
         _choosedSkin = PlayerPrefs.GetInt("Skin", 0);

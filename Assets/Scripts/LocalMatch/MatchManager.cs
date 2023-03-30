@@ -1,9 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class MatchManager : MonoBehaviour
 {
-    private static float _startFreezeTime = 1.2f;
+    [SerializeField] private GameObject _countDownCanvas;
+
+    private static int _startFreezeTime = 2;
     private static GameObject _player0;
     private static GameObject _player1;
     private static GameObject _ball;
@@ -11,6 +14,7 @@ public class MatchManager : MonoBehaviour
     private static Transform _player1Spawn;
     private static Transform _ballPlayer0Spawn;
     private static Transform _ballPlayer1Spawn;
+    
 
     private void Start()
     {
@@ -22,7 +26,7 @@ public class MatchManager : MonoBehaviour
         _ballPlayer0Spawn = GameObject.Find("BallPlayer0Spawn").GetComponent<Transform>();
         _ballPlayer1Spawn = GameObject.Find("BallPlayer1Spawn").GetComponent<Transform>();
 
-        ReloadMatch(3);
+        _ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
     }
 
     protected void ReloadMatch(int player)
@@ -50,7 +54,22 @@ public class MatchManager : MonoBehaviour
         _player1.GetComponent<CharacterMovementController>().enabled = false;
         _ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
 
-        yield return new WaitForSeconds(_startFreezeTime);
+        int time = _startFreezeTime;
+
+        TMP_Text _countDownText = _countDownCanvas.transform.GetComponentInChildren<TMP_Text>();
+
+        _countDownCanvas.SetActive(true);
+        _countDownText.text = time.ToString();
+        while (time > 0)
+        {
+            yield return new WaitForSeconds(1);
+            time--;
+
+            if (time == 1) _countDownText.text = time.ToString();
+            else if (time >= 2 && time <= 3) _countDownText.text = time.ToString();
+            else _countDownText.text = time.ToString();
+        }
+        _countDownCanvas.SetActive(false);
 
         _player0.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         _player1.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;

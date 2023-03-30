@@ -15,6 +15,9 @@ public class AIMovementController : MonoBehaviour
     [Range(0, 9.81f)] [SerializeField] private float _gravityScale = 3.5f;
     [SerializeField] private Sprite[] _sprites;
     [SerializeField] private SpriteRenderer _spriteRender;
+    [Header("Audio")]
+    [SerializeField] private AudioClip _jumpClip;
+    [SerializeField] private AudioSource _playerSound;
 
     private float _ballTouchTime;
     private float _horizontalMistakeTime;
@@ -34,6 +37,7 @@ public class AIMovementController : MonoBehaviour
     private bool _doubleJump;
     private Rigidbody2D _rigidbody;
     private Rigidbody2D _ballRigidbody;
+    private Animator _animator;
     private GameObject _ball;
     private static AIScoreManager _scoreManager;
 
@@ -66,6 +70,8 @@ public class AIMovementController : MonoBehaviour
         _ball = GameObject.Find("Ball");
         _ballRigidbody = _ball.GetComponent<Rigidbody2D>();
         _scoreManager = GameObject.Find("ScoreManager").GetComponent<AIScoreManager>();
+        _playerSound.volume = GameObject.Find("Sounds Source(Clone)").GetComponent<AudioSource>().volume;
+        _animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -88,6 +94,11 @@ public class AIMovementController : MonoBehaviour
 
         if (_ball.transform.position.x > 0)
         {
+            if (_ballRigidbody.bodyType == RigidbodyType2D.Static || (_ball.transform.position.x < 2.5f && _ball.transform.position.y < 0.5f && _ball.transform.position.x > 0f && transform.position.x < 2.95f && transform.position.y < 0.5f))
+            {
+                _jumping = true;
+                up = _jumpForce;
+            }
             if (_directionChangedTime > _directionChangeInterval)
             {
                 if (_ball.transform.position.x + _xHitCenter - transform.position.x > -_horizontalZone + _xHitCenter/2)
@@ -109,7 +120,7 @@ public class AIMovementController : MonoBehaviour
                 else
                     MoveLeft = true;
             }
-            if (_ball.transform.position.y - transform.position.y < _verticalZone && _ball.transform.position.y - transform.position.y > 1)
+            if (_ball.transform.position.y - transform.position.y < _verticalZone && Mathf.Abs(Mathf.Abs(_ball.transform.position.y) - Mathf.Abs(transform.position.y)) > 1)
                 MoveUp = true;
         }
 
@@ -120,13 +131,24 @@ public class AIMovementController : MonoBehaviour
                 _jumping = true;
                 _doubleJump = true;
                 _inAir = true;
+                _animator.SetBool("InAir", true);
                 up += _jumpForce;
+
+                _animator.SetTrigger("LeftBoost");
+
+                _playerSound.clip = _jumpClip;
+                _playerSound.Play();
             }
             else if (_doubleJump && _jumpTime > 0.5f && _ball.transform.position.y - transform.position.y > _verticalZone / 2)
             {
                 _jumping = true;
                 _doubleJump = false;
                 up += _jumpForce;
+
+                _animator.SetTrigger("LeftBoost");
+
+                _playerSound.clip = _jumpClip;
+                _playerSound.Play();
             }
         }
         if (MoveRight)
@@ -167,10 +189,14 @@ public class AIMovementController : MonoBehaviour
             }
         }
 
+
         if (_jumping)
             _rigidbody.velocity = new Vector2(right, up);
         else
             if(right != 0) _rigidbody.velocity = new Vector2(right, _rigidbody.velocity.y);
+
+        if (right != 0) _animator.SetBool("Move", true);
+        else _animator.SetBool("Move", false);
 
         if (_ball.transform.position.x - transform.position.x < _horizontalZone && _ball.transform.position.x - transform.position.x > -_horizontalZone)
         {
@@ -184,6 +210,7 @@ public class AIMovementController : MonoBehaviour
         if (collision.collider.gameObject.layer == 6)
         {
             _inAir = false;
+            _animator.SetBool("InAir", false);
             _doubleJump = false;
         }
         if (collision.collider.gameObject.layer == 7)
