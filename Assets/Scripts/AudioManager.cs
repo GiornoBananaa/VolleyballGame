@@ -79,10 +79,10 @@ public class AudioManager : MonoBehaviour
 
     public void Mute()
     {
-        _musicSource.volume = 0;
+        _musicSource.mute = true;
     }
     public void UnMute()
     {
-        _musicSource.volume = _musicVolume;
+        _musicSource.mute = false;
     }
 }

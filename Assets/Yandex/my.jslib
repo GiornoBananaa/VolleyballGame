@@ -1,7 +1,20 @@
 mergeInto(LibraryManager.library, {
 
   StartAd : function(){
-    ysdk.adv.showFullscreenAdv()
+    ysdk.adv.showFullscreenAdv({
+      callbacks: {
+        onOpen: () => {
+          myGameInstance.SendMessage("AudioManager", "Mute");
+        },
+        onClose: () => {
+          myGameInstance.SendMessage("AudioManager", "UnMute");
+        },
+        onError: (e) => {
+          myGameInstance.SendMessage("AudioManager", "UnMute");
+          console.log('Error while open video ad:', e);
+        }
+      } 
+    })
   },
 
   RewardedAd : function(){
@@ -15,11 +28,13 @@ mergeInto(LibraryManager.library, {
         },
         onRewarded: () => {
           myGameInstance.SendMessage("SkinSwitcher", "AdReward");
+          myGameInstance.SendMessage("AudioManager", "UnMute");
         },
-        nError: (e) => {
+        onError: (e) => {
+          myGameInstance.SendMessage("AudioManager", "UnMute");
           console.log('Error while open video ad:', e);
         }
       } 
-    });
+    })
   }
 });
